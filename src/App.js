@@ -51,7 +51,7 @@ export default function App() {
       <img ref={pic} src={imgs[currImg]} alt="image" />
       <button onClick={prev}>prev</button>
 
-      <button onClick={next}>next img</button>
+      <button onClick={next}>next</button>
     </div>
   );
 }
