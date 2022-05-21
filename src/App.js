@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useRef} from "react";
 export default function App() {
   const imgs = [
     "https://cdn.pixabay.com/photo/2014/09/24/14/29/macbook-459196_960_720.jpg",
@@ -6,30 +6,49 @@ export default function App() {
     "https://cdn.pixabay.com/photo/2017/11/27/21/31/computer-2982270__340.jpg"
   ];
   const [currImg, setCurrImg] = useState(0);
+  const index=useRef(currImg)
+  const pic=useRef()
+  
   function next() {
-    if (currImg === imgs.length - 1) {
-      setCurrImg(0);
+    if (index.current === imgs.length - 1) {
+      // setCurrImg(0);
+      index.current=0
+      // setCurrImg(index.current)
+      pic.current.src=imgs[index.current]
+
     } else {
-      setCurrImg((prevState) => prevState + 1);
+      // setCurrImg((prevState) => prevState + 1);
+      index.current++
+      // setCurrImg(index.current)
+      pic.current.src=imgs[index.current]
+
     }
+    
   }
   function prev() {
-    if (currImg === 0) {
-      setCurrImg(imgs.length - 1);
+    if (index.current === 0) {
+      index.current=imgs.length - 1;
+      setCurrImg(index.current)
+
     } else {
-      setCurrImg((prevState) => prevState - 1);
+      // setCurrImg((prevState) => prevState - 1);
+      index.current--
+      setCurrImg(index.current)
+
+
     }
   }
 
 //  setInterval(()=>{
-//    setCurrImg((prevState)=>prevState+1)
-//  },3000)
+//   next()
+// },1000)
 
-  console.log(currImg);
+  console.log(index);
+  console.log(pic)
   return (
     <div className="App">
       <h1>Hare krishna</h1>
-      <img src={imgs[currImg]} alt="image" />
+      <img ref={pic} src={imgs[currImg]} alt="image" />
       <button onClick={prev}>prev</button>
 
       <button onClick={next}>next</button>
